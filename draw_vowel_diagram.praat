@@ -1,3 +1,17 @@
+#DRAW_FORMANT_PLOT_FROM_TABLE.PRAAT
+#AUTHOR: KRISTINE YU, Time-stamp: <2010-11-11 22:13:27 amoebe>
+#LING 104, FALL 2010 JUN/YU, LAB 2: VOWEL FORMANTS
+#=============================================================================================================
+# Le script recherche les valeurs des formants (F1 et F2) correspondant au segment qui contient l'étiquette
+# donnée à la procédure @draw_me_a_phone et crée un tableau de valeurs de formants.
+# Il dessine ensuite le trapèze vocalique et l'enregistre dans le fichier "output.pdf"
+# Ce fichier peut être créé en extrayant automatiquement les valeurs des formants à l'aide du script
+# "get_formants.praat".
+# Joaquim Llisterri, UAB, 14 de marzo de 2016
+# Adapté par Anna Marczyk, UTJJ, 2023
+# Adapté par Léna Baraquin, mars 2023
+#=============================================================================================================
+
 work_directory_path$ = "_"
 formant_file_name$ = "_"
 formant_file_extension$ = "_"

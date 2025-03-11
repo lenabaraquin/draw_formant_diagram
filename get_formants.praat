@@ -1,4 +1,15 @@
-work_directory_path$ = "_"
+# This script is distributed under the GNU General Public License.
+# Copyright 4.7.2003 Mietta Lennes
+#=====================================================================================================
+# Pour le fichier son défini et pour son TextGrid correspondant, les valeurs des formants vocalique 
+# sont calculées au centre de chaque intervalle contenant une étiquette. Les résultats sont 
+# enregistrés dans un fichier .csv avec les colonnes séparées par des point-virgules et les lignes 
+# séparées par des retours à la ligne.
+# Joaquim Llisterri, UAB, le 13 mars 2016
+# Adaptation : Anna Marczyk, UTJJ, mars 2023
+# Adaptation : Léna Baraquin, mars 2025
+#=====================================================================================================
+
 sound_name$ = "_"
 
 sound_path$ = work_directory_path$ + sound_name$ + ".wav"
