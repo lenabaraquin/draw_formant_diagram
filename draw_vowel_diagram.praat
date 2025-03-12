@@ -43,6 +43,7 @@ Read Table from semicolon-separated file: formant_file_path$
 selectObject: "Table 'formant_file_name$'"
 
 # Préparation du graphique
+Erase all
 Select outer viewport: 0, 4, 0, 5
 Draw inner box
 Marks left every: 1, 100, "yes", "yes", "yes"
@@ -51,9 +52,27 @@ Marks top every: 1, 500, "yes", "yes", "yes"
 Text top: "yes", "F2 (Hz)"
 
 # Dessin des occurences des phones et du champ de dispersion pour chaque voyelle
-@draw_me_a_phone: "a", "Red", f1_min, f1_max, f2_min, f2_max
-@draw_me_a_phone: "e", "Blue", f1_min, f1_max, f2_min, f2_max
-@draw_me_a_phone: "o", "Green", f1_min, f1_max, f2_min, f2_max
+vowel$ = "x"
+while vowel$ <> ""
+  beginPause: "Dessin des voyelles"
+    comment: "Entrez la voyelle que vous souhaitez dessiner."
+    comment: "Laissez vide si vous avez terminé."
+    word: "vowel", ""
+    choice: "color", 1
+      option: "Black"
+      option: "Blue"
+      option: "Cyan"
+      option: "Green"
+      option: "Magenta"
+      option: "Maroon"
+      option: "Pink"
+      option: "Red"
+      option: "Yellow"
+  endPause: "Next", 1
+  if vowel$ <> ""
+    @draw_me_a_phone: "'vowel$'", "'color$'", f1_min, f1_max, f2_min, f2_max
+  endif
+endwhile
 
 # Définition de la taille de la fenêtre de dessin
 Select outer viewport: 0, 5.5, 0, 5.7
