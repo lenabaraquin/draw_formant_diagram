@@ -12,7 +12,7 @@
 # Adapté par Léna Baraquin, mars 2023
 #=============================================================================================================
 
-# Emplacement des fichiers
+# Définition de l'emplacement des fichiers
 work_directory_path$ = "_"
 formant_file_name$ = "_"
 formant_file_extension$ = "_"
