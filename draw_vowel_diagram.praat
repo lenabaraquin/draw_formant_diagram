@@ -12,10 +12,24 @@
 # Adapté par Léna Baraquin, mars 2023
 #=============================================================================================================
 
+# Formulaire pour définir l'emplacement des fichiers
+form: "Emplacement des fichiers"
+  folder: "work_directory_path", ""
+  sentence: "formant_file_name", "output"
+  choice: "OS", 1
+    option: "Windows"
+    option: "MacOS"
+    option: "Linux"
+endform
+
 # Définition de l'emplacement des fichiers
-work_directory_path$ = "_"
-formant_file_name$ = "_"
-formant_file_extension$ = "_"
+if "'OS$'" == "Windows"
+  work_directory_path$ = work_directory_path$ + "\"
+else
+  work_directory_path$ = work_directory_path$ + "/"
+endif
+formant_file_name$ = "'formant_file_name$'"
+formant_file_extension$ = ".csv"
 formant_file_path$ = work_directory_path$ + formant_file_name$ + formant_file_extension$
 
 # Valeurs minimales et maximales que peuvent prendre les premier et deuxième formants
@@ -26,7 +40,7 @@ f2_max = 3500
 
 # Récupération des informations du fichier contenant les formants dans un objet Table
 Read Table from semicolon-separated file: formant_file_path$
-selectObject: "Table formant_file_name$"
+selectObject: "Table 'formant_file_name$'"
 
 # Préparation du graphique
 Select outer viewport: 0, 4, 0, 5
