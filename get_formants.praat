@@ -12,7 +12,10 @@
 
 # Formulaire pour définir l'emplacement des fichiers
 form: "Emplacement des fichiers"
+  comment: "Sélectionnez le dossier dans lequel se trouvent"
+  comment: "le fichier son et le fichier TextGrid."
   folder: "work_directory_path", ""
+  comment: "Entrez le nom du fichier son (sans l'extension)"
   sentence: "sound_name", ""
   choice: "OS", 1
     option: "Windows"
@@ -38,7 +41,8 @@ beginPause: "Paramètres pour le calcul des formants"
   comment: "Nombre de formants recherchés :"
   integer: "max_formants", "5"
   comment: "Seuil au dessous duquel les formants sont recherchés (en Hz):"
-  real: "ceiling", "5000.0"
+  comment: "5000 Hz pour une voix d'homme, 5500 Hz pour une voix de femme."
+  real: "ceiling", "5500.0"
   comment: "Taille de la fenêtre d'analyse (en s):"
   real: "win_length", "0.025"
   comment: "Fréquence en dessous de laquelle un filtre passe-bas est appliqué (en Hz):"
