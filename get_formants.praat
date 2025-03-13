@@ -31,11 +31,24 @@ sound_path$ = work_directory_path$ + sound_name$ + ".wav"
 textgrid_path$ = work_directory_path$ + sound_name$ + ".TextGrid"
 output_path$ = work_directory_path$ + "output.csv"
 
+# Formulaire pour définir les paramètres pour le calcul des formants
+beginPause: "Paramètres pour le calcul des formants"
+  comment: "Intervalle de temps qui sépare deux analyses (en s) :"
+  real: "time_step", "0.01"
+  comment: "Nombre de formants recherchés :"
+  integer: "max_formants", "5"
+  comment: "Seuil au dessous duquel les formants sont recherchés (en Hz):"
+  real: "ceiling", "5000.0"
+  comment: "Taille de la fenêtre d'analyse (en s):"
+  real: "win_length", "0.025"
+  comment: "Fréquence en dessous de laquelle un filtre passe-bas est appliqué (en Hz):"
+  real: "pre_emphasis", "50.0"
+endPause: "Continue", 1
+
 # Ouverture du fichier son et calcul des formants
 Read from file: sound_path$
 selectObject: "Sound 'sound_name$'"
-#To Formant (burg): time step, max number of formants, formant ceiling, window length, pre-emphasis from
-To Formant (burg): 0.01, 5.0, 5000, 0.025, 50.0
+To Formant (burg): time_step, max_formants, ceiling, win_length, pre_emphasis
 
 # Ouverture du fichier TextGrid et calcul du nombre de tier
 Read from file: textgrid_path$
