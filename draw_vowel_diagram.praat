@@ -53,10 +53,6 @@ selectObject: "Table 'formant_file_name$'"
 Erase all
 Select outer viewport: 0, 4, 0, 5
 Draw inner box
-Marks left every: 1, 100, "yes", "yes", "yes"
-Text left: "yes", "F1 (Hz)"
-Marks top every: 1, 500, "yes", "yes", "yes"
-Text top: "yes", "F2 (Hz)"
 
 # Dessin des occurences des phones et du champ de dispersion pour chaque voyelle
 vowel$ = "x"
@@ -81,11 +77,17 @@ while vowel$ <> ""
   endif
 endwhile
 
-# Définition de la taille de la fenêtre de dessin
-Select outer viewport: 0, 5.5, 0, 5.7
+# Garnissage du graphique
+Marks left every: 1, 100, "yes", "yes", "yes"
+Text left: "yes", "F1 (Hz)"
+Marks top every: 1, 500, "yes", "yes", "yes"
+Text top: "yes", "F2 (Hz)"
 
-# Enregistrement du graphique dans "output.pdf"
-# Save as PDF file: work_directory_path$ + "output.pdf"
+# Sélection de la fenêtre d'export
+Select outer viewport: 0, 4, 0, 5
+
+# Enregistrement du graphique dans output.pdf
+# Save as PDF file: work_directory_path$ + "output.pdf"
 
 # Définition de la procédure utilisée pour dessiner les occurences et le champ de dispersion des phones
 procedure draw_me_a_phone: phone$, color$, f1_min, f1_max, f2_min, f2_max
