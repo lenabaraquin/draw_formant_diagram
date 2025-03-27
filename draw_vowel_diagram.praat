@@ -53,9 +53,9 @@ selectObject: "Table 'formant_file_name$'"
 Erase all
 Select outer viewport: 0, 4, 0, 5
 Draw inner box
-Marks left every: 1, 100, "yes", "yes", "yes"
+Marks left every: 1.0, 100.0, "yes", "yes", "yes"
 Text left: "yes", "F1 (Hz)"
-Marks top every: 1, 500, "yes", "yes", "yes"
+Marks top every: 1.0, 500.0, "yes", "yes", "yes"
 Text top: "yes", "F2 (Hz)"
 
 # Dessin des occurences des phones et du champ de dispersion pour chaque voyelle
