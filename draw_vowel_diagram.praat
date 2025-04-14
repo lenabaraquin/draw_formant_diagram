@@ -95,3 +95,16 @@ procedure draw_me_a_phone: phone$, color$, f1_min, f1_max, f2_min, f2_max
   Scatter plot: "f2", f2_max, f2_min, "f1", f1_max, f1_min, "phone", 10, "no"
   Draw ellipse (standard deviation):  "f2", f2_max, f2_min, "f1", f1_max, f1_min, 2.0, "no"
 endproc
+
+procedure decompose_path: .path$
+  dot_index = rindex(.path$, ".")
+  separator_index = rindex(.path$, "/")
+  if separator_index == 0
+    separator_index = rindex(.path$, "\")
+  endif
+  string_length = length(.path$)
+  diff_length = dot_index - separator_index
+  .directory_path$ = left$(.path$, separator_index)
+  .file_name$ = mid$(.path$, separator_index + 1, diff_length - 1)
+  .extension$ = right$(.path$, string_length - dot_index + 1)
+endproc

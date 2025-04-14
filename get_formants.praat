@@ -83,3 +83,16 @@ for interval from 1 to nb_intervals
     appendFileLine: "'output_path$'", "'resultline$'"
   endif
 endfor
+
+procedure decompose_path: .path$
+  dot_index = rindex(.path$, ".")
+  separator_index = rindex(.path$, "/")
+  if separator_index == 0
+    separator_index = rindex(.path$, "\")
+  endif
+  string_length = length(.path$)
+  diff_length = dot_index - separator_index
+  .directory_path$ = left$(.path$, separator_index)
+  .file_name$ = mid$(.path$, separator_index + 1, diff_length - 1)
+  .extension$ = right$(.path$, string_length - dot_index + 1)
+endproc
