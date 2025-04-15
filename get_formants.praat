@@ -11,10 +11,10 @@
 #=====================================================================================================
 
 # Formulaire pour définir l'emplacement des fichiers
-form: "Emplacement des fichiers"
+form: "Emplacement du fichier son"
   comment: "Sélectionnez le fichier son :"
   infile: "file_path", ""
-  comment: "Attention, le fichier TextGrid doit se trouver dans le même dossier."
+  comment: "Attention, le fichier TextGrid doit avoir le même nom et se trouver dans le même dossier."
 endform
 
 # Execution de la procédure decompose_path
@@ -31,9 +31,14 @@ output_path$ = work_directory_path$ + "output.csv"
 if fileReadable(sound_path$) == 0
   writeInfoLine: "Praat ne parvient pas à ouvrir le fichier ", sound_path$
 elif fileReadable(textgrid_path$) == 0
-  writeInfoLine: "Praat ne parvient pas à ouvrir le fichier ", textgrid_path$
-  appendInfoLine: "Assurez vous que le fichier TextGrid ait le même nom que le fichier son."
-  appendInfoLine: "Assurez vous que le fichier TextGrid et le fichier son soient dans le même dossier."
+  beginPause: "Emplacement du fichier TextGrid"
+    comment: "Le fichier TextGrid n'a pas été trouvé automatiquement."
+    comment: "Sélectionnez le fichier TextGrid :"
+    infile: "textgrid_path", ""
+  endPause: "Continue", 1
+  if fileReadable(textgrid_path) == 0
+    writeInfoLine: "Praat ne parvient pas à ouvrir le fichier ", textgrid_path$
+  endif
 endif
 
 # Formulaire pour définir les paramètres pour le calcul des formants
