@@ -14,8 +14,7 @@
 form: "Emplacement des fichiers"
   comment: "Sélectionnez le fichier son :"
   infile: "file_path", ""
-  comment: "Attention, le fichier TextGrid doit se"
-  comment: "trouver dans le même répertoire."
+  comment: "Attention, le fichier TextGrid doit se trouver dans le même dossier."
 endform
 
 # Execution de la procédure decompose_path
@@ -27,6 +26,15 @@ sound_name$ = decompose_path.file_name$
 sound_path$ = work_directory_path$ + sound_name$ + ".wav"
 textgrid_path$ = work_directory_path$ + sound_name$ + ".TextGrid"
 output_path$ = work_directory_path$ + "output.csv"
+
+# Test d'ouverture des fichiers 
+if fileReadable(sound_path$) == 0
+  writeInfoLine: "Praat ne parvient pas à ouvrir le fichier ", sound_path$
+elif fileReadable(textgrid_path$) == 0
+  writeInfoLine: "Praat ne parvient pas à ouvrir le fichier ", textgrid_path$
+  appendInfoLine: "Assurez vous que le fichier TextGrid ait le même nom que le fichier son."
+  appendInfoLine: "Assurez vous que le fichier TextGrid et le fichier son soient dans le même dossier."
+endif
 
 # Formulaire pour définir les paramètres pour le calcul des formants
 beginPause: "Paramètres pour le calcul des formants"
