@@ -24,7 +24,7 @@ endform
 formant_file_path$ = formant_file$
 formant_file_name$ = decompose_path.file_name$
 
-# Test d'ouverture des fichiers 
+# Test d'ouverture du fichier
 if fileReadable(formant_file_path$) == 0
   writeInfoLine: "Praat ne parvient pas à ouvrir le fichier ", formant_file_path$
 endif
