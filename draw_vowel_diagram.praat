@@ -14,26 +14,20 @@
 
 # Formulaire pour définir l'emplacement des fichiers
 form: "Emplacement des fichiers"
-  comment: "Sélectionnez le dossier dans lequel se trouve"
-  comment: "le fichier contenant les formants."
-  folder: "work_directory_path", ""
-  comment: "Entrez le nom du fichier contenant les formants (sans l'extension)"
-  sentence: "formant_file_name", "output"
-  choice: "OS", 1
-    option: "Windows"
-    option: "MacOS"
-    option: "Linux"
+  comment: "Sélectionnez le fichier contenant les formants :"
+  infile: "formant_file", ""
+  comment: "S'il a été généré avec le script get_formants.praat, il s'appelle surement 'output.csv'."
 endform
 
-# Définition de l'emplacement des fichiers
-if "'OS$'" == "Windows"
-  work_directory_path$ = work_directory_path$ + "\"
-else
-  work_directory_path$ = work_directory_path$ + "/"
+# Définition du nom du fichier et de son chemin
+@decompose_path: formant_file$
+formant_file_path$ = formant_file$
+formant_file_name$ = decompose_path.file_name$
+
+# Test d'ouverture des fichiers 
+if fileReadable(formant_file_path$) == 0
+  writeInfoLine: "Praat ne parvient pas à ouvrir le fichier ", formant_file_path$
 endif
-formant_file_name$ = "'formant_file_name$'"
-formant_file_extension$ = ".csv"
-formant_file_path$ = work_directory_path$ + formant_file_name$ + formant_file_extension$
 
 # Valeurs minimales et maximales que peuvent prendre les premier et deuxième formants
 beginPause: "Choix des plages de fréquences où se trouvent les formants"
@@ -53,10 +47,6 @@ selectObject: "Table 'formant_file_name$'"
 Erase all
 Select outer viewport: 0, 4, 0, 5
 Draw inner box
-Marks left every: 1.0, 100.0, "yes", "yes", "yes"
-Text left: "yes", "F1 (Hz)"
-Marks top every: 1.0, 500.0, "yes", "yes", "yes"
-Text top: "yes", "F2 (Hz)"
 
 # Dessin des occurences des phones et du champ de dispersion pour chaque voyelle
 vowel$ = "x"
@@ -81,8 +71,13 @@ while vowel$ <> ""
   endif
 endwhile
 
-# Définition de la taille de la fenêtre de dessin
-Select outer viewport: 0, 5.5, 0, 5.7
+# Dessin des légendes
+Select outer viewport: 0, 4, 0, 5
+Draw inner box
+Marks left every: 1.0, 100.0, "yes", "yes", "yes"
+Text left: "yes", "F1 (Hz)"
+Marks top every: 1.0, 500.0, "yes", "yes", "yes"
+Text top: "yes", "F2 (Hz)"
 
 # Enregistrement du graphique dans "output.pdf"
 # Save as PDF file: work_directory_path$ + "output.pdf"
@@ -96,6 +91,7 @@ procedure draw_me_a_phone: phone$, color$, f1_min, f1_max, f2_min, f2_max
   Draw ellipse (standard deviation):  "f2", f2_max, f2_min, "f1", f1_max, f1_min, 2.0, "no"
 endproc
 
+# Définition de la procédure pour extraire le répertoire et le nom du fichier
 procedure decompose_path: .path$
   dot_index = rindex(.path$, ".")
   separator_index = rindex(.path$, "/")

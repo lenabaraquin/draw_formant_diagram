@@ -86,7 +86,7 @@ for interval from 1 to nb_intervals
   endif
 endfor
 
-# Procédure pour extraire le répertoire et le nom du fichier
+# Définition de la procédure pour extraire le répertoire et le nom du fichier
 procedure decompose_path: .path$
   dot_index = rindex(.path$, ".")
   separator_index = rindex(.path$, "/")
