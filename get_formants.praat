@@ -12,24 +12,18 @@
 
 # Formulaire pour définir l'emplacement des fichiers
 form: "Emplacement des fichiers"
-  comment: "Sélectionnez le dossier dans lequel se trouvent"
-  comment: "le fichier son et le fichier TextGrid."
-  folder: "work_directory_path", ""
-  comment: "Entrez le nom du fichier son (sans l'extension)"
-  sentence: "sound_name", ""
-  choice: "OS", 1
-    option: "Windows"
-    option: "MacOS"
-    option: "Linux"
+  comment: "Sélectionnez le fichier son :"
+  infile: "file_path", ""
+  comment: "Attention, le fichier TextGrid doit se"
+  comment: "trouver dans le même répertoire."
 endform
 
-# Définition de l'emplacement des fichiers
-if "'OS$'" == "Windows"
-  work_directory_path$ = work_directory_path$ + "\"
-else
-  work_directory_path$ = work_directory_path$ + "/"
-endif
-sound_name$ = sound_name$
+# Execution de la procédure decompose_path
+@decompose_path: file_path$
+
+# Définition des différentes variables contenant les noms de fichiers
+work_directory_path$ = decompose_path.directory_path$
+sound_name$ = decompose_path.file_name$
 sound_path$ = work_directory_path$ + sound_name$ + ".wav"
 textgrid_path$ = work_directory_path$ + sound_name$ + ".TextGrid"
 output_path$ = work_directory_path$ + "output.csv"
@@ -84,6 +78,7 @@ for interval from 1 to nb_intervals
   endif
 endfor
 
+# Procédure pour extraire le répertoire et le nom du fichier
 procedure decompose_path: .path$
   dot_index = rindex(.path$, ".")
   separator_index = rindex(.path$, "/")
